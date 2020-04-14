@@ -1,0 +1,1 @@
+<a href="{{ url($crud->route.'/'.$entry->getKey().'/ditolak') }}" class="btn btn-sm btn-link"><i class="fa fa-check-circle-o"></i>Ditolak</a>
