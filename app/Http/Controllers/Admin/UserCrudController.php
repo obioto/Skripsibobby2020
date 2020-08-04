@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\User;
 
 
 /**
@@ -25,7 +26,7 @@ class UserCrudController extends CrudController
         $this->crud->setModel('App\User');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/user');
         $this->crud->setEntityNameStrings('user', 'users');
-        $this->crud->denyAccess(['delete','update']);
+        $this->crud->denyAccess(['create','delete']);
         $this->crud->addButtonFromView('line', 'confirm', 'confirm', 'beginning');
         $this->crud->enableExportButtons();
     }
@@ -45,6 +46,12 @@ class UserCrudController extends CrudController
                 'type'  => 'text'
             ],  
             [
+                'name' => 'fotoKtp', // The db column name
+                'label' => "Foto KTP User", // Table column heading
+                'type' => 'image',
+                'prefix' => '/uploads/images/fotoktp/'
+            ],  
+            [
                 'label' => "Nomor KTP User", // Table column heading
                 'name'  => 'nomorKtp', // The db column name
                 'type'  => 'text'
@@ -58,12 +65,6 @@ class UserCrudController extends CrudController
                 'label' => "Alamat User", // Table column heading
                 'name'  => 'alamat', // The db column name
                 'type'  => 'text'
-            ],  
-            [
-                'name' => 'fotoKtp', // The db column name
-                'label' => "Foto KTP User", // Table column heading
-                'type' => 'image',
-                'prefix' => '/uploads/images/fotoktp/'
             ],  
             [
                 'name' => 'confirmed', // The db column name
@@ -94,7 +95,9 @@ class UserCrudController extends CrudController
 
     public function confirm($id)
     {
-        $this->data['confirmed'] = '1';
+        $confirm = User::where('id',$id)->find($id);
+        $confirm->confirmed = '1';
+        $confirm->save();
         
         return redirect('/admin/user');
     }

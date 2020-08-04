@@ -28,7 +28,7 @@ class PerpanjanganCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/perpanjangan');
         $this->crud->setEntityNameStrings('perpanjangan', 'perpanjangans');
         $this->crud->enableExportButtons();
-        $this->crud->denyAccess(['delete','update']);
+        $this->crud->denyAccess(['create','delete','update']);
         $this->crud->addButtonFromView('line', 'Verifikasi2', 'Verifikasi2', 'beginning');
         $this->crud->addButtonFromView('line', 'Verifikasi', 'Verifikasi', 'beginning');
 
@@ -137,7 +137,7 @@ class PerpanjanganCrudController extends CrudController
             
             return redirect('/admin/perpanjangan')->with('status', 'Konten Berhasil Diperpanjang');            
         }
-        else{
+        else if($this->data['status'] = 'diterima'){
             return redirect('/admin/perpanjangan')->with('status', 'Konten Sudah Diperpanjang');
         }
     }

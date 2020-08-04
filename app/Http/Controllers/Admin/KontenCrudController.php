@@ -26,7 +26,7 @@ class KontenCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/konten');
         $this->crud->setEntityNameStrings('konten', 'kontens');
         $this->crud->enableExportButtons();
-        $this->crud->denyAccess(['delete']);
+        $this->crud->denyAccess(['create','delete']);
         $this->crud->addButtonFromView('line', 'confirm', 'confirm', 'beginning');
     }
 

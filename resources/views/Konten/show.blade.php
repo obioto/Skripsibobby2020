@@ -27,13 +27,7 @@
                     <div class="row" style="margin-top: 7vh">
                         <div class="col-sm justify-content-center align-self-center" style="font-size: 4vh;border-right: solid;">
                         <h5 style="margin-left:8vh">
-                            <?php
-                                $terkumpul = $konten->terkumpul;
-                                $target = $konten->target;
-                                $persen = ($terkumpul / $target);
-                                $hasil = number_format((float)$persen, 1, '.', '') * 100;
-                            ?>
-                            {{$hasil}} %
+                            {{ round((float)$konten->terkumpul/$konten->target * 100 )}}%
                         </h5>
                         <h5 style="font-weight:100;margin-left:8vh">
                             Target
@@ -62,7 +56,7 @@
                         @if($diff !== 0)
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                        Donasi kuy!
+                        Beri Donasi
                         </button>
 
                         <!-- Modal -->
@@ -81,6 +75,7 @@
                                 <h2 style="text-align: center;font-weight: bold;color: cornflowerblue;">
                                     {{$konten->nomorRekening}}
                                 </h2>
+                                <h5 style="text-align: center;">{{$konten->bank}}</h5>
                                 <h6 style="text-align: center;">atas nama</h6>
                                 <h6 style="text-align: center;">{{$konten->Owner->namaLengkap}}</h6>
                                     <div>
@@ -94,7 +89,7 @@
                                             <strong>{{ $errors->first('namaLengkap') }}</strong>
                                         </span>
                                         @endif
-                                    <input type="checkbox" id="isanonim" name="isanonim" checked onclick="toggleswitch()"> Membuat Nama Menjadi Anonim
+                                    <input type="checkbox" id="isanonim" name="isanonim" checked onclick="toggleswitch()"> Beri donasi sebagai anonim
                                     </div>
                                     <div class="form-group" style="margin-top:1rem ">
                                     <label class="control-label" for="jumlah">Jumlah (Dalam Rupiah)</label>
@@ -231,7 +226,7 @@
                     @if($donatur->isconfirmed == '1')
                         @if($donatur->isanonim == '1')
                         <tr>
-                        <td>NN</td>
+                        <td>Anonim</td>
                         <td>{{$donatur->created_at}}</td>
                         <td>{{$donatur->jumlah}}</td>
                         </tr>

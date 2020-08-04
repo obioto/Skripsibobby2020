@@ -23,6 +23,7 @@ class CreateKontensTable extends Migration
             $table->dateTime('lama_donasi')->nullable();            
             $table->boolean('confirmed')->default('0');
             $table->string('nomorRekening')->nullable();
+            $table->string('bank')->nullable();
             $table->timestamps();
 
             $table->foreign('id_user')

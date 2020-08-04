@@ -22,7 +22,7 @@ class Konten extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = ['id_user','judul','deskripsi',
-                            'gambar','target','terkumpul','lama_donasi',
+                            'gambar','target','terkumpul','lama_donasi', 'bank',
                             'nomorRekening','confirmed','created_at','updated_at'];
     // protected $hidden = [];
     // protected $dates = [];

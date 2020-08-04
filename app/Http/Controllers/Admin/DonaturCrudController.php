@@ -31,7 +31,43 @@ class DonaturCrudController extends CrudController
     protected function setupListOperation()
     {
         // TODO: remove setFromDb() and manually define Columns, maybe Filters
-        $this->crud->setColumns(['namaLengkap', 'jumlah','nomorTelepon','bukti','isconfirmed','isanonim']);
+        $this->crud->addColumns([
+            [
+                'label' => "Nama Lengkap", // Table column heading
+                'name'  => 'namaLengkap', // The db column name
+                'type'  => 'text'
+            ],
+            [
+                'label' => "Jumlah", // Table column heading
+                'name'  => 'jumlah', // The db column name
+                'type'  => 'text'
+            ],
+            [
+                'label' => "Nomor Telepon", // Table column heading
+                'name'  => 'nomorTelepon', // The db column name
+                'type'  => 'text'
+            ],
+            [
+                'label' => "Bukti Transaksi", // Table column heading
+                'name' => 'bukti', // The db column name
+                'type' => 'image',
+                'prefix' => '/uploads/images/buktitransfer/',
+            ],
+            [
+                'name' => 'isconfirmed', // The db column name
+                'label' => "Status Donasi", // Table column heading
+                'type' => 'boolean',
+                'options' => [0 => 'Belum Verifikasi', 1 =>  'Verifikasi']
+            ],  
+            [
+                'name' => 'isanonim', // The db column name
+                'label' => "Status Anonim", // Table column heading
+                'type' => 'boolean',
+                'options' => [0 => 'Tidak', 1 =>  'Ya']
+            ],  
+        ]);
+
+        // $this->crud->setColumns(['namaLengkap', 'jumlah','nomorTelepon','bukti','isconfirmed','isanonim']);
     }
 
     protected function setupCreateOperation()
