@@ -162,7 +162,7 @@
                     <div class="media">
                         <div class="media-body">
                             <h5 class="mt-0">{{$update->tanggal}}</h5>
-                            <img src="<?php echo asset("uploads/images/GambarKonten/$konten->gambar")?>" style="width:200px" class="mr-3" alt=" ">
+                            <img src="<?php echo asset("uploads/images/Perkembangan/$update->gambar")?>" style="width:200px" class="mr-3" alt=" ">
                             <br>
                             <h6>{{$update->deskripsi}}<h6>
                             <h5 style="text-align:right">Rp. {{$update->pengeluaran}}</h5>
