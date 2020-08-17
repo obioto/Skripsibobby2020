@@ -27,7 +27,13 @@
                     <div class="row" style="margin-top: 7vh">
                         <div class="col-sm justify-content-center align-self-center" style="font-size: 4vh;border-right: solid;">
                         <h5 style="margin-left:8vh">
-                            {{ round((float)$konten->terkumpul/$konten->target * 100 )}}%
+                            <?php
+                                $terkumpul = $konten->terkumpul;
+                                $target = $konten->target;
+                                $persen = ($terkumpul / $target);
+                                $hasil = number_format((float)$persen, 1, '.', '') * 100;
+                            ?>
+                            {{$hasil}} %
                         </h5>
                         <h5 style="font-weight:100;margin-left:8vh">
                             Target
@@ -56,7 +62,7 @@
                         @if($diff !== 0)
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                        Beri Donasi
+                        Donasi kuy!
                         </button>
 
                         <!-- Modal -->
@@ -75,7 +81,6 @@
                                 <h2 style="text-align: center;font-weight: bold;color: cornflowerblue;">
                                     {{$konten->nomorRekening}}
                                 </h2>
-                                <h5 style="text-align: center;">{{$konten->bank}}</h5>
                                 <h6 style="text-align: center;">atas nama</h6>
                                 <h6 style="text-align: center;">{{$konten->Owner->namaLengkap}}</h6>
                                     <div>
@@ -89,7 +94,7 @@
                                             <strong>{{ $errors->first('namaLengkap') }}</strong>
                                         </span>
                                         @endif
-                                    <input type="checkbox" id="isanonim" name="isanonim" checked onclick="toggleswitch()"> Beri donasi sebagai anonim
+                                    <input type="checkbox" id="isanonim" name="isanonim" checked onclick="toggleswitch()"> Membuat Nama Menjadi Anonim
                                     </div>
                                     <div class="form-group" style="margin-top:1rem ">
                                     <label class="control-label" for="jumlah">Jumlah (Dalam Rupiah)</label>
@@ -157,7 +162,7 @@
                     <div class="media">
                         <div class="media-body">
                             <h5 class="mt-0">{{$update->tanggal}}</h5>
-                            <img src="<?php echo asset("uploads/images/Perkembangan/$update->gambar")?>" style="width:200px" class="mr-3" alt=" ">
+                            <img src="<?php echo asset("uploads/images/GambarKonten/$konten->gambar")?>" style="width:200px" class="mr-3" alt=" ">
                             <br>
                             <h6>{{$update->deskripsi}}<h6>
                             <h5 style="text-align:right">Rp. {{$update->pengeluaran}}</h5>
@@ -226,7 +231,7 @@
                     @if($donatur->isconfirmed == '1')
                         @if($donatur->isanonim == '1')
                         <tr>
-                        <td>Anonim</td>
+                        <td>NN</td>
                         <td>{{$donatur->created_at}}</td>
                         <td>{{$donatur->jumlah}}</td>
                         </tr>
@@ -282,8 +287,14 @@
                 @endif
                 </tbody>
                 </table>
-              </div>
+              </div> 
               <div class="tab-pane fade" id="nav-perpanjangan" role="tabpanel" aria-labelledby="nav-perpanjangan-tab">
+                
+                @if ($diff >= 5)
+                <tr>
+                    <td colspan="3">Belum bisa mengajukan Perpanjangan</td>
+                </tr>
+                @else
               <form class="col-md-12 p-t-10" role="form" method="POST" enctype="multipart/form-data" action="{{ route('Perpanjangan',$konten->id) }}">
                     {{ csrf_field() }}
                     <label class="control-label" for="jumlah_hari">Tambahan Hari </label>
@@ -305,6 +316,7 @@
                     <br>
                     <button type="submit" class="btn btn-primary">Ajukan Permohonan</button>
                 </form>
+                @endif
                 <br>
                 <table class="table table-striped">
                 <thead>
