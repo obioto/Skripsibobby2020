@@ -35,5 +35,6 @@ Route::post('konten/{konten}','KontenController@storedonasi')->name('isiDonasi')
 Route::post('konten/perkembangan/{konten}','PerkembanganController@store')->name('perkembangan');
 Route::post('konten/verifikasi/{konten}','KontenController@konfirmasidonasi')->name('verifikasi');
 Route::post('konten/Perpanjangan/{id}','PerpanjanganController@store')->name('Perpanjangan');
+Route::get('list','ListkontenController@createview')->name('ListKonten');
 Route::get('cari','CariController@index');
 Route::get('/cari/hasil', 'CariController@getjudul')->name('getjudul');
