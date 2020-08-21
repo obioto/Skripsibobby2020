@@ -73,7 +73,7 @@ class KontenController extends Controller
             'terkumpul'                        => '0',
             'lama_donasi'                      => $limit,
             'nomorRekening'                    => $data['nomorRekening'],
-            'bank'                    => $data['bank'],
+            'bank'                             => $data['bank'],
             'create_at'                        => Carbon::now('Asia/Jakarta')->toDateTimeString(),
             'updated_at'                       => Carbon::now('Asia/Jakarta')->toDateTimeString(),
         ]);
